@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <% if (user) { %>
+        <div class="application">
+          <ul>
+            <li>
+              <i class="fa-solid fa-user"></i><a href="/dashboard">Profile</a>
+            </li>
+            <% if (user.role==='candidate' ) { %>
+              <li>
+                <i class="fa-solid fa-briefcase"></i><a href="/dashboard/my-applications">My Application</a>
+              </li>
+              <% } %>
+                <% if (user.role==='recruiter' ) { %>
+                  <li>
+                    <i class="fa-solid fa-plus-square"></i><a href="/dashboard/add-job">Add Job</a>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-user-gear"></i><a href="/dashboard/manage-job">Manage Job</a>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-briefcase"></i><a href="/dashboard/applications">Application</a>
+                  </li>
+                  <% } %>
+                    <% if (user.role==='admin' ) { %>
+                      <li>
+                        <i class="fa-solid fa-user-shield"></i><a href="/dashboard/admin">Admin</a>
+                      </li>
+                      <li>
+                        <i class="fa-solid fa-users "></i><a href="/dashboard/manage-user">Manage Users</a>
+                      </li>
+                      <% } %>
+          </ul>
+          <% } %>
+        </div>
+    </aside>
+</body>
+<script src="https://kit.fontawesome.com/d0ad42bc5d.js" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<style>
+  body {
+    overflow-y: hidden;
+  }
+</style>
+
+<body>
+  <%- include('Navbar.ejs') %>
+    <%- include('aside-dashboard.ejs') %>
+
+    <div id="messageBox"></div>
+
+
+      <main class="main-content">
+        <div class="user-card">
+          <div class="content-header">
+            <h2>Information</h2>
+          </div>
+          <div class="image">
+            <% if (user.profileImage && user.profileImage.length> 0) { %>
+              <img src="/<%= user.profileImage %>" alt="profile" class="profile-pic" />
+              <% } else{ %>
+                <img src="/Images/profile-pic.png" alt="profile" class="profile-pic" />
+                <% } %>
+          </div>
+          <div class="editIcon">
+            <a href="/dashboard/edit-profile">
+              <i class="fa-regular fa-edit"></i><span class="icon-text">Edit</span></a>
+          </div>
+        </div>
+        <div id="detail">
+          <p class="p">
+            <strong>Username:</strong>
+            <span id="span1">
+              <%= user.username %>
+            </span>
+          </p>
+          <p class="p">
+            <strong>Email:</strong><span id="span2">
+              <%= user.email %>
+            </span>
+          </p>
+          <p class="p">
+            <strong>Contact No:</strong><span id="span3">
+              <%= user.contactNo %>
+            </span>
+          </p>
+          <p class="p">
+            <strong>Gender:</strong><span id="span4">
+              <%= user.gender.charAt(0).toUpperCase() + user.gender.slice(1) %>
+            </span>
+          </p>
+          <p class="p">
+            <strong>Role:</strong><span id="span5">
+              <%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %>
+            </span>
+          </p>
+          <p class="p">
+            <strong>Location:</strong>
+            <span id="span6">
+              <%= user.location %>
+            </span>
+          </p>
+        </div>
+        </div>
+      </main>
+      </div>
+</body>
+<script src="https://kit.fontawesome.com/d0ad42bc5d.js" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    const messageBox = document.getElementById("messageBox");
+
+    if (message) {
+      messageBox.textContent = message;
+      messageBox.style.display = "block";
+
+      setTimeout(() => {
+        messageBox.style.display = "none";
+        history.replaceState(null, "", window.location.pathname);
+      }, 1500);
+    }
+  });
+
+</script>
+</html>

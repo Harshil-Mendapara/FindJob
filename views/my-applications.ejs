@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+</head>
+<style>
+  body {
+    overflow: auto;
+  }
+
+  #application {
+    width: 85%;
+    height: auto;
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: 5px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 8px 50px;
+    margin: 50%;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr {
+    text-align: middle;
+  }
+
+  .fa-regular {
+    margin: 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .fa-regular:hover {
+    color: #007bff;
+  }
+
+  th {
+    background-color: #50a1f7;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 73px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: -10px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.3s ease-out;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #333;
+    text-decoration: none;
+  }
+
+
+  .modal-content.job-detail-modal {
+    background-color: #fff;
+    margin: -10px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.3s ease-out;
+  }
+
+  .modal-content.job-detail-modal h3 {
+    margin: 0 0 6% 0;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .modal-content.job-detail-modal p {
+    font-size: 16px;
+    margin: 15px 0;
+  }
+
+  .modal-content.job-detail-modal p strong {
+    font-weight: bold;
+    margin: 0 10px;
+  }
+
+  .modal-content.job-detail-modal .create-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .modal-content.job-detail-modal .create-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 45px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .modal-content.job-detail-modal .create-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<body>
+  <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+
+      <div id="application">
+        <table>
+          <tr>
+            <th>No</th>
+            <th>Position</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Job type</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          <% if (candidate.length> 0) { %>
+            <% candidate.forEach((proposal, index)=> { %>
+              <% if (proposal.job) { %>
+                <tr>
+                  <td>
+                    <%= index + 1 %>
+                  </td>
+                  <td>
+                    <%= proposal.job.position %>
+                  </td>
+                  <td>
+                    <%= proposal.job.company %>
+                  </td>
+                  <td>
+                    <%= proposal.job.location %>
+                  </td>
+                  <td>
+                    <%= proposal.job.job_type %>
+                  </td>
+                  <td>
+                    <%= proposal.status %>
+                  </td>
+                  <td><i class="fa-regular fa-eye job-detail-btn" data-job-id="<%= proposal.job.id %>"></i></td>
+                </tr>
+                <% } %>
+                  <% }) %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="12" style="text-align: center;">No applications found.</td>
+                      </tr>
+                      <% } %>
+        </table>
+      </div>
+
+
+      <% candidate.forEach((proposal)=> { %> <% if (proposal.job) { %>
+          <div id="jobDetailModal<%= proposal.job.id %>" class="modal">
+            <div class="modal-content job-detail-modal">
+              <span class="close">&times;</span>
+              <h3 class="job-detail">Job Detail</h3>
+              <p><strong>Position:</strong>
+                <%= proposal.job.position %>
+              </p>
+              <p><strong>Company:</strong>
+                <%= proposal.job.company %>
+              </p>
+              <p><strong>Location:</strong>
+                <%= proposal.job.location %>
+              </p>
+              <p><strong>Salary:</strong>
+                <%= proposal.job.salary %>
+              </p>
+              <p><strong>Skills:</strong>
+                <%= proposal.job.skills %>
+              </p>
+              <p><strong>Job Type:</strong>
+                <%= proposal.job.job_type %>
+              </p>
+              <p><strong>Experience:</strong>
+                <%= proposal.job.experience %>
+              </p>
+              <p><strong>Qualification:</strong>
+                <%= proposal.job.qualifications %>
+              </p>
+              <p><strong>Description:</strong>
+                <%= proposal.job.description %>
+              </p>
+            </div>
+          </div>
+          <% } %>
+            <% }) %>
+
+</body>
+<script src="https://kit.fontawesome.com/d0ad42bc5d.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const jobDetailButtons = document.querySelectorAll('.job-detail-btn');
+    const modals = document.querySelectorAll('.modal');
+    const spans = document.querySelectorAll('.close');
+
+    jobDetailButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const jobId = button.getAttribute('data-job-id');
+        const modal = document.getElementById(`jobDetailModal${jobId}`);
+        modal.style.display = 'block';
+      });
+    });
+
+    spans.forEach(span => {
+      span.onclick = function () {
+        const modal = span.closest('.modal');
+        modal.style.display = 'none';
+      };
+    });
+
+    window.onclick = function (event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    };
+  });
+</script>
+
+</html>

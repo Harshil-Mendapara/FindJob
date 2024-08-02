@@ -1,0 +1,293 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.dashboard-container {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 14%;
+  background-color: #ffffff;
+  padding: 15px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.profile {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: auto;
+}
+
+.profile-pic {
+  width: 130px;
+  height: 130px;
+  color: #000;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-radius: 50%;
+  margin: 10% 12% 0 6%;
+  position: sticky;
+}
+
+.editIcon {
+  margin: 8px 24% 0 65px;
+  color: #007bff;
+  cursor: pointer;
+  position: fixed;
+}
+
+.fa-regular {
+  color: #007bff;
+}
+.editIcon a {
+  text-decoration: none;
+}
+
+.icon-text {
+  margin-left: 10px;
+  color: #007bff;
+}
+
+.profile h2 {
+  margin: 5px 0;
+  font-size: 1.2em;
+  color: #007bff;
+}
+
+.application {
+  position: absolute;
+  margin-top: -15px;
+  margin-right: 20px;
+}
+
+.application ul {
+  list-style-type: none;
+  margin: 55% 0;
+  padding: 0;
+}
+
+.application li {
+  margin: 20px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.application li i {
+  margin: 2px;
+  position: relative;
+}
+
+.application a {
+  display: flex;
+  margin: 0 25px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #373636;
+}
+
+.application li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.application a:hover {
+  color: #007bff;
+}
+
+li:hover {
+  color: #007bff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-header h2 {
+  text-align: center;
+  margin: 20px 0;
+  color: #007bff;
+}
+
+.user-card {
+  width: 38%;
+  /* width: 35%; */
+  height: 50%;
+  margin: 5% 40% 0 25%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 4px, rgba(0, 0, 0, 0.1) -2px -2px 4px;
+  position: fixed;
+}
+
+#detail {
+  width: 18%;
+  margin: 12% 20% 0 43%;
+  text-align: left;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#detail p {
+  display: flex;
+}
+
+#detail strong {
+  margin-right: 1rem;
+}
+
+#span1 {
+  margin-left: 7%;
+}
+#span2 {
+  margin-left: 20%;
+}
+#span3 {
+  margin-left: 5%;
+}
+#span4 {
+  margin-left: 16%;
+}
+#span5 {
+  margin-left: 24%;
+}
+#span6 {
+  margin-left: 12%;
+}
+
+.edit-container {
+  width: 40%;
+  height: auto;
+  margin: 60px 0 50px 35%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  border-radius: 25px;
+  position: fixed;
+}
+
+.form-group {
+  margin: 0 16% 0 15px;
+}
+
+.ep-h2 {
+  text-align: center;
+  margin: 10px -82px;
+  color: #007bff;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#username,
+#email,
+#role,
+#location {
+  width: 130%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+#email,
+#role,
+#location {
+  width: 100%;
+  margin-right: 60px;
+}
+
+input[type="file"] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#gender {
+  width: 273%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.update-btn {
+  width: 25%;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 100px;
+  border: 1px solid #007bff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+#messageBox {
+  display: none;
+  padding: 45px 80px;
+  background-color: #67b5fa;
+  color: #fff;
+  border: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  right: 36%;
+  z-index: 1000;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 4px, rgba(0, 0, 0, 0.1) -2px -2px 4px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .user-card {
+    width: 90%;
+  }
+}

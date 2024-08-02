@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <link rel="stylesheet" href="/css/Home.css" />
+</head>
+<style>
+  body {
+    background-color: #f8f9fa;
+    overflow: hidden;
+  }
+</style>
+
+<body>
+  <%- include('Navbar.ejs') %>
+    <div id="messageBox"></div>
+
+    <div class="content">
+      <h1>Find Your <span class="fancy">Dream Job </span></h1>
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam,
+        placeat molestias voluptatibus neque reprehenderit velit iusto et ut rem
+        quasi, libero expedita sit! Nesciunt blanditiis aperiam quibusdam dolore
+        ullam obcaecati! Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Aperiam, placeat molestias voluptatibus neque reprehenderit velit
+        iusto et ut rem quasi, libero expedita sit! Nesciunt blanditiis aperiam
+        quibusdam dolore ullam obcaecati!
+      </p>
+      <button class="btn" type="submit">
+        <a href="/all-jobs">Apply Now</a>
+      </button>
+      <div class="placeholder">
+        <img src="/Images/job-logo.jpg" alt="job" />
+      </div>
+    </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    const messageBox = document.getElementById("messageBox");
+
+    if (message) {
+      messageBox.textContent = message;
+      messageBox.style.display = "block";
+
+      setTimeout(() => {
+        messageBox.style.display = "none";
+        history.replaceState(null, "", window.location.pathname);
+      }, 1500);
+    }
+  });
+</script>
+
+</html>

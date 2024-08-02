@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .job-detail {
+      width: 80%;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    .job-detail h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .job-info {
+      margin-top: 20px;
+    }
+
+    .job-info p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .job-info p strong {
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+
+      <section class="job-detail">
+        <h3>Position: <%= job.position %>
+        </h3>
+        <div class="job-info">
+          <p><strong>Comapnay : <%= job.company %></strong>
+          <p><strong>Location : <%= job.location %></strong>
+          <p><strong>Job Type : <%= job.job_type %></strong>
+          <p><strong>Skills: <li>
+                <%= job.skills %>
+              </li></strong>
+          </p>
+          <p><strong>Salary:</strong>
+            <%= job.salary %>
+          </p>
+          <p><strong>Experience:</strong>
+            <%= job.experience %>
+          </p>
+          <p><strong>qualifications:</strong>
+            <%= job.qualifications %>
+          </p>
+          <p><strong>Description:</strong>
+            <%= job.description %>
+          </p>
+        </div>
+      </section>
+</body>
+
+</html>

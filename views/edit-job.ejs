@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindJob</title>
+    <link rel="stylesheet" href="/css/job.css" />
+  </head>
+  <body>
+    <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+
+
+    <div class="Job-container">
+        <h2>Update Job</h2>
+        <form action="/job/edit-job/<%= job.id %>" method="POST">
+          <input type="hidden" name="_method" value="PUT" />
+          <div class="input-container">
+            <div class="form-group">  
+              <label for="position">Position</label>
+              <input
+                type="text"
+                id="position"
+                name="position"
+                value="<%= job.position %>"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value="<%= job.company %>"
+                />
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input
+                type="text"
+                id="c-location"
+                name="location"
+                value="<%= job.location %>"
+                required
+              />
+            </div>
+          </div>
+  
+          <div class="input-container">
+            <div class="form-group">
+              <label for="job_type">job Type</label>
+              <select id="job_type" name="job_type">
+                <option>Select job Type</option>
+                <option value="Full-Time" <%= job.job_type === 'Full-Time' ? 'selected' : '' %>>Full-Time</option>
+                <option value="Part-Time" <%= job.job_type === 'Part-Time' ? 'selected' : '' %>>Part-Time</option>
+                <option value="Internship" <%= job.job_type === 'Internship' ? 'selected' : '' %>>Internship</option>
+                  </select>
+            </div>
+            <div class="form-group">
+              <label for="salary">Salary</label>
+              <input
+                type="text"
+                id="salary"
+                name="salary"
+                value="<%= job.salary %>"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="">Skills</label>
+              <input
+                type="text"
+                id="skills"
+                name="skills"
+                value="<%= job.skills %>"
+                required
+              />
+            </div>
+          </div>
+  
+          <div class="input-container">
+            <div class="form-group">
+              <label for="experience">Experience</label>
+              <input
+                type="text"
+                id="experience"
+                name="experience"
+                value="<%= job.experience %>"
+                />
+            </div>
+            <div class="form-group">
+              <label for="qualifications">Qualifications</label>
+              <input
+                type="text"
+                id="qualifications"
+                name="qualifications"
+                value="<%= job.qualifications %>"
+                />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              required
+            ><%= job.description %></textarea>
+          </div>
+          <div class="create-container">
+            <button class="create-btn" type="submit" onclick="return updatejobs()">Update</button>
+          </div>
+        </form>
+      </div>
+  
+    <script
+    src="https://kit.fontawesome.com/d0ad42bc5d.js"
+    crossorigin="anonymous">
+</script>
+<script>
+      const updatejobs = () => {
+      return confirm("Are you sure you want to update this job?");
+    };
+
+</script>
+</html>
+

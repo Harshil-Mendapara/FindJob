@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+</head>
+<style>
+  * {
+    overflow: auto;
+  }
+
+  body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #application {
+    width: 85%;
+    height: auto;
+    padding: 20px;
+    margin-top: 85px;
+    margin-left: 5px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: auto;
+  }
+
+  th,
+  td {
+    padding: 7px;
+    margin: 50%;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  i {
+    cursor: pointer;
+  }
+
+  th {
+    background-color: #50a1f7;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .fa-regular {
+    margin: -4px 3px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+    overflow: auto;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: -10px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.3s ease-out;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #333;
+    text-decoration: none;
+  }
+
+
+  .modal-content.job-detail-modal {
+    background-color: #fff;
+    margin: -35px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.3s ease-out;
+  }
+
+  .modal-content.job-detail-modal h3 {
+    margin: -5px 0 4% 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #50a1f7;
+  }
+
+  #candidate-detail {
+    margin: 10px 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #50a1f7;
+  }
+
+  .modal-content.job-detail-modal p {
+    font-size: 16px;
+    margin: 15px 0;
+  }
+
+  .modal-content.job-detail-modal p strong {
+    font-weight: bold;
+    margin: 0 10px;
+  }
+
+  .modal-content.job-detail-modal .create-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .modal-content.job-detail-modal .create-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 45px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .modal-content.job-detail-modal .create-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-app {
+    width: 38%;
+    margin: 0 2px;
+    padding: 3px 0;
+    position: relative;
+    background-color: #007bff;
+    color: white;
+    border-radius: 100px;
+    border: 1px solid #007bff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+
+  .btn-app:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-app:focus {
+    outline: none;
+    transform: scale(1.05);
+  }
+
+  select {
+    width: 41%;
+    border: 1px solid #ddd;
+    border-radius: 100px;
+    background-color: #007bff;
+    padding: 1px 0;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  select option {
+    padding: 2px;
+    background-color: #fff;
+    color: #007bff;
+  }
+
+  select option:hover {
+    background-color: #e9e9e9;
+  }
+
+  #messageBox {
+    display: none;
+    padding: 52px 75px;
+    background-color: #67b5fa;
+    color: #fff;
+    border: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    right: 36%;
+    z-index: 1000;
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 4px, rgba(0, 0, 0, 0.1) -2px -2px 4px;
+  }
+</style>
+
+<body>
+  <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+      <div id="messageBox"></div>
+
+      <div id="application">
+        <table>
+          <tr>
+            <th>No</th>
+            <th>Position</th>
+            <th>Company</th>
+            <th>Candidate Name</th>
+            <th>Candidate Email</th>
+            <th>Candidate No</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          <% if (candidate && candidate.length> 0) { %>
+            <% candidate.forEach((app, index)=> { %>
+              <tr>
+                <td>
+                  <%= index + 1 %>
+                </td>
+                <td>
+                  <%= app.job.position %>
+                </td>
+                <td>
+                  <%= app.job.company %>
+                </td>
+                <td>
+                  <%= app.candidate.Fullname %>
+                </td>
+                <td>
+                  <%= app.candidate.email %>
+                </td>
+                <td>
+                  <%= app.candidate.contactNo %>
+                </td>
+                <td>
+                  <%= app.status %>
+                </td>
+                <td>
+                  <i class="fa-regular fa-eye job-detail-btn" data-job-id="<%= app.job.id %>"
+                    data-candidate-id="<%= app.candidate.id %>"></i>
+                  <select onchange="updateStatus('<%= app.candidate.id  %>', this.value)">
+                    <option value="Pending" <%=app.status==='Pending' ? 'selected' : '' %>>Pending</option>
+                    <option value="Reviewed" <%=app.status==='Reviewed' ? 'selected' : '' %>>Reviewed</option>
+                    <option value="Intreview" <%=app.status==='Intreview' ? 'selected' : '' %>>Intreview</option>
+                    <option value="Selected" <%=app.status==='Selected' ? 'selected' : '' %>>Selected</option>
+                    <option value="Rejected" <%=app.status==='Rejected' ? 'selected' : '' %>>Rejected</option>
+                  </select>
+                  <button class="btn-app"
+                    onclick="window.open('/Resume/<%= app.candidate.resume.split('/').pop() %>', '_blank')">Resume</button>
+                </td>
+              </tr>
+              <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="10" style="text-align: center">No applications found</td>
+                  </tr>
+                  <% } %>
+        </table>
+      </div>
+
+      <% candidate.forEach((application)=> { %>
+        <% if (application.job) { %>
+          <div id="jobDetailModal<%= application.job.id %>_<%= application.candidate.id %>" class="modal">
+            <div class="modal-content job-detail-modal">
+              <span class="close">&times;</span>
+              <h3 class="job-detail">Job Detail</h3>
+              <p><strong>Position:</strong>
+                <%= application.job.position %>
+              </p>
+              <p><strong>Company:</strong>
+                <%= application.job.company %>
+              </p>
+              <p><strong>Location:</strong>
+                <%= application.job.location %>
+              </p>
+              <p><strong>Salary:</strong>
+                <%= application.job.salary %>
+              </p>
+              <p><strong>Skills:</strong>
+                <%= application.job.skills %>
+              </p>
+              <p><strong>Job Type:</strong>
+                <%= application.job.job_type %>
+              </p>
+              <p><strong>Experience:</strong>
+                <%= application.job.experience %>
+              </p>
+              <p><strong>Qualification:</strong>
+                <%= application.job.qualifications %>
+              </p>
+              <p><strong>Description:</strong>
+                <%= application.job.description %>
+              </p>
+              <hr />
+              <h3 id="candidate-detail">Candidate Detail</h3>
+              <p><strong>Full Name:</strong>
+                <%= application.candidate.Fullname %>
+              </p>
+              <p><strong>Email:</strong>
+                <%= application.candidate.email %>
+              </p>
+              <p><strong>Contact No:</strong>
+                <%= application.candidate.contactNo %>
+              </p>
+              <p><strong>Current Salary:</strong>
+                <%= application.candidate.current_salary %>
+              </p>
+              <p><strong>Expected Salary:</strong>
+                <%= application.candidate.expected_salary %>
+              </p>
+              <p><strong>Experience:</strong>
+                <%= application.candidate.experience %>
+              </p>
+              <p><strong>Education:</strong>
+                <%= application.candidate.education %>
+              </p>
+              <p><strong>Address:</strong>
+                <%= application.candidate.address %>
+              </p>
+              <hr />
+            </div>
+          </div>
+          <% } %>
+            <% }) %>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const jobDetailButtons = document.querySelectorAll('.job-detail-btn');
+    const modals = document.querySelectorAll('.modal');
+    const spans = document.querySelectorAll('.close');
+
+    jobDetailButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const jobId = button.getAttribute('data-job-id');
+        const candidateId = button.closest('tr').querySelector('.job-detail-btn').dataset.candidateId;
+        const modal = document.getElementById(`jobDetailModal${jobId}_${candidateId}`);
+        modal.style.display = 'block';
+      });
+    });
+
+    spans.forEach(span => {
+      span.onclick = function () {
+        const modal = span.closest('.modal');
+        modal.style.display = 'none';
+      };
+    });
+
+    window.onclick = function (event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    };
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    const messageBox = document.getElementById("messageBox");
+
+    if (message) {
+      messageBox.textContent = message;
+      messageBox.style.display = "block";
+
+      setTimeout(() => {
+        messageBox.style.display = "none";
+        history.replaceState(null, "", window.location.pathname);
+      }, 1000);
+    }
+  });
+
+  async function updateStatus(candidateId, status) {
+    const messageBox = document.getElementById("messageBox");
+
+    try {
+      const response = await fetch(`/recruiter/updateJobStatus/${candidateId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status })
+      });
+
+      const result = await response.json();
+      if (result.error) {
+        showMessage(result.message);
+      } else {
+        showMessage('Status updated successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    } catch (error) {
+      showMessage('An error occurred while updating the status.');
+    }
+  }
+
+  function showMessage(message) {
+    const messageBox = document.getElementById("messageBox");
+    messageBox.textContent = message;
+    messageBox.style.display = "block";
+
+    setTimeout(() => {
+      messageBox.style.display = "none";
+      history.replaceState(null, "", window.location.pathname);
+    }, 1500);
+  }
+
+</script>
+
+</html>

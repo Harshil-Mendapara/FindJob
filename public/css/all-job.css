@@ -1,0 +1,357 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#messageBox {
+  display: none;
+  padding: 52px 75px;
+  background-color: #67b5fa;
+  color: #fff;
+  border: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  right: 36%;
+  z-index: 1000;
+  border-radius: 10px;
+  font-size: 22px;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 4px, rgba(0, 0, 0, 0.1) -2px -2px 4px;
+}
+
+.search-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 2px;
+  margin-left: 58%;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+}
+
+.search-input {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #4d90fe;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.search-button:hover {
+  background-color: #357ae8;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-top: 25px;
+}
+
+.card {
+  width: 25%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 20px 20px 35px 85px;
+}
+
+.card-body {
+  padding: 15px 20px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #333;
+}
+
+i {
+  margin-right: 15px;
+  color: #000;
+}
+
+.card-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.card-location {
+  color: #666;
+  margin-top: 10px;
+}
+
+.list-group-flush {
+  padding: 25px 0;
+}
+
+.list-group-item {
+  list-style-type: none;
+  padding: 10px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -10px;
+}
+
+#card-btn,
+#searchcard-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#card-btn:hover,
+#searchcard-btn:hover {
+  background-color: #0056b3;
+}
+
+.result {
+  margin: 100px 42%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: -10px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #007bff;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-content .input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+.modal-content .form-group {
+  flex: 1 1 100%;
+  margin-bottom: -10px;
+}
+
+.modal-content .form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.modal-content .form-group label {
+  display: block;
+  margin: 5px 5px;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.modal-content .form-group input::placeholder {
+  font-size: 12px;
+}
+
+.modal-content .create-container {
+  text-align: center;
+}
+
+.modal-content .create-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 45px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.modal-content .create-btn:hover {
+  background-color: #0056b3;
+}
+
+.input-file {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #0e7ef7;
+  border-radius: 10px;
+  padding: 40px;
+  background: #e6e6ef;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.input-file input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.input-file::before {
+  content: "Upload Resume";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0e7ef7;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  pointer-events: none;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.input-file input[type="file"]:focus {
+  outline: none;
+}
+
+/* Job Detail Modal Styles */
+.modal-content.job-detail-modal {
+  background-color: #fff;
+  margin: -10px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: slide-in 0.3s ease-out;
+}
+
+.modal-content.job-detail-modal h3 {
+  margin: 0 0 6% 0;
+  color: #007bff;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-content.job-detail-modal p {
+  font-size: 16px;
+  margin: 15px 0;
+}
+
+.modal-content.job-detail-modal p strong {
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.modal-content.job-detail-modal .create-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.modal-content.job-detail-modal .create-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 45px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-content.job-detail-modal .create-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindJob</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <%- include('Navbar.ejs') %>
+        <%- include('aside-dashboard.ejs') %>
+
+            <div class="info-container">
+                <div class="section">
+                    <div class="h3">
+                        <h3>User Info</h3>
+                    </div>
+                    <div class="container">
+                        <div class="box box-user">
+                            <h2>
+                                <%= allUser %>
+                            </h2>
+                            <p>Total Members</p>
+                        </div>
+                        <div class="box box-user">
+                            <h2>
+                                <%= roles.admin %>
+                            </h2>
+                            <p>Admins</p>
+                        </div>
+                        <div class="box box-user">
+                            <h2>
+                                <%= roles.recruiter %>
+                            </h2>
+                            <p>Recruiters</p>
+                        </div>
+                        <div class="box box-user">
+                            <h2>
+                                <%= roles.candidate %>
+                            </h2>
+                            <p>Candidate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="job-container">
+                <h3>Job Info</h3>
+                <div class="section">
+                    <div class="container">
+                        <div class="box box-job">
+                            <h2>
+                                <%= jobs %>
+                            </h2>
+                            <p>Total Jobs</p>
+                        </div>
+                        <div class="box box-pending">
+                            <h2>
+                                <%= jobStatus.Pending %>
+                            </h2>
+                            <p>Pending</p>
+                        </div>
+                        <div class="box box-reviewed">
+                            <h2>
+                                <%= jobStatus.Reviewed %>
+                            </h2>
+                            <p>Reviewed</p>
+                        </div>
+                        <div class="box box-interview">
+                            <h2>
+                                <%= jobStatus.Intreview %>
+                            </h2>
+                            <p>Interview</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="selected">
+                    <div class="box box-selected">
+                        <h2>
+                            <%= jobStatus.Selected %>
+                        </h2>
+                        <p>Selected</p>
+                    </div>
+                    <div class="box box-rejected">
+                        <h2>
+                            <%= jobStatus.Rejected %>
+                        </h2>
+                        <p>Rejected</p>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>

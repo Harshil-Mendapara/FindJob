@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindJob</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+  <body>
+    <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+
+
+    <div class="edit-container">
+      <h2 class="ep-h2">Update Profile</h2>
+      <% if (user) { %>
+      <form action="/user/update" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="input-container">  
+        <div class="edit-form-group">
+          <label for="title">Username</label>
+          <input type="text" id="username" name="username" value="<%= user.username %>"/>
+        </div>
+        <div class="edit-form-group">
+          <label for="title">Email</label>
+          <input type="email" id="email" name="email" value="<%= user.email %>"/>
+        </div>
+      </div>
+      <div class="input-container">  
+        <div class="edit-form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
+            <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
+            <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
+          </select>
+        </div>
+        <div class="edit-form-group">
+          <label for="title">Role</label>
+          <input type="text" id="role" name="role" value="<%= user.role %>" disabled/>
+        </div>
+        </div>
+        <div class="input-container">  
+          <div class="edit-form-group">
+          <label for="title">Profile Image</label>
+          <input type="file" id="profileImage" name="profileImage"/>
+        </div>
+        <div class="edit-form-group">
+          <label for="title">Location</label>
+          <input type="text" id="location" name="location" value="<%= user.location %>"/>
+        </div>
+        </div>
+        <div class="button-container">
+          <button class="update-btn" type="submit">Update</button>
+        </div>
+        <% } %>
+    </div>
+
+    <script
+    src="https://kit.fontawesome.com/d0ad42bc5d.js"
+    crossorigin="anonymous"
+  ></script>
+</html>
+

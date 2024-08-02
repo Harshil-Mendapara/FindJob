@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <link rel="stylesheet" href="/css/all-job.css">
+</head>
+
+<body>
+  <%- include('Navbar.ejs') %>
+    <div id="messageBox"></div>
+
+    <div class="search-container">
+      <form id="search-form" class="search-form">
+        <input type="text" id="search-input" class="search-input" placeholder="Job title, keywords, or company" />
+        <button type="submit" class="search-button">Find Jobs</button>
+      </form>
+    </div>
+
+
+    <div class="card-container" id="job-cards">
+      <% jobs.forEach((job, index)=> { %>
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">
+              <%= job.position %>
+            </h6>
+            <p class="card-text"><i class="fas fa-building"></i>
+              <%= job.company %>
+            </p>
+            <p class="card-location"><i class="fas fa-map-marker-alt"></i>
+              <%= job.location %>
+            </p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <i class="fas fa-money-bill-wave"></i>From <%= job.salary %>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-briefcase"></i>
+                <%= job.job_type %>
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-clock"></i>
+                <%= job.experience %>
+              </li>
+            </ul>
+            <div class="button-group">
+              <button id="card-btn" data-job-id="<%= job.id %>" class="job-detail-btn">Details</button>
+              <% if (user && user.role==='candidate' ) { %>
+                <button id="card-btn" class="apply-btn" data-job-id="<%= job.id %>">Apply</button>
+                <% } %>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+    </div>
+
+    <!-- apply  Modal -->
+    <% jobs.forEach((job)=> { %>
+      <div id="applyModal<%= job.id %>" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Apply for Job</h2>
+          <form id="applyForm" action="/candidate/apply-job/<%= job.id %>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" id="jobId<%= job.id %>" name="jobId" value="<%= job.id %>">
+            <div class="input-file">
+              <label for="resume"></label>
+              <input type="file" id="resume" name="resume" required />
+            </div>
+            <div class="input-container">
+              <div class="form-group">
+                <label for="Fullname">Full Name</label>
+                <input type="text" id="Fullname" name="Fullname" placeholder="Type your Full Name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Type your Email" required />
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="form-group">
+                <label for="contactNo">contact No</label>
+                <input type="tel" id="contactNo" name="contactNo" placeholder="Type your Contat No" required />
+              </div>
+              <div class="form-group">
+                <label for="address">City, State</label>
+                <input type="text" id="address" name="address" placeholder="Type your  City, State (optional)" />
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="form-group">
+                <label for="current_salary">Current Salary</label>
+                <input type="text" id="current_salary" name="current_salary" placeholder="Type your Current Salary"
+                  required />
+              </div>
+              <div class="form-group">
+                <label for="expected_salary">Expected Salary</label>
+                <input type="text" id="expected_salary" name="expected_salary" placeholder="Type your Expected Salary"
+                  required />
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="form-group">
+                <label for="experience">Experience</label>
+                <input type="text" id="experience" name="experience" placeholder="Type your Experience (year/month)"
+                  required />
+              </div>
+              <div class="form-group">
+                <label for="education">Education</label>
+                <input type="text" id="education" name="education" placeholder="Type your education" required />
+              </div>
+            </div>
+            <div class="create-container">
+              <button class="create-btn" type="submit">Apply</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Job detail modal -->
+      <div id="jobDetailModal<%= job.id %>" class="modal">
+        <div class="modal-content job-detail-modal">
+          <span class="close">&times;</span>
+          <h3 class="job-detail">Job Detail</h3>
+          <p><strong>Position:</strong>
+            <%= job.position %>
+          </p>
+          <p><strong>Company:</strong>
+            <%= job.company %>
+          </p>
+          <p><strong>Location:</strong>
+            <%= job.location %>
+          </p>
+          <p><strong>Salary:</strong>
+            <%= job.salary %>
+          </p>
+          <p><strong>Salary:</strong>
+            <%= job.skills %>
+          </p>
+          <p><strong>Job Type:</strong>
+            <%= job.job_type %>
+          </p>
+          <p><strong>Experience:</strong>
+            <%= job.experience %>
+          </p>
+          <p><strong>Qualification:</strong>
+            <%= job.qualifications %>
+          </p>
+          <p><strong>Description:</strong>
+            <%= job.description %>
+          </p>
+        </div>
+      </div>
+      </div>
+      <% }); %>
+
+</body>
+<script src="https://kit.fontawesome.com/d0ad42bc5d.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('job-cards').addEventListener('click', (event) => {
+      if (event.target.classList.contains('apply-btn')) {
+        event.preventDefault();
+        const jobId = event.target.getAttribute('data-job-id');
+        const modal = document.getElementById(`applyModal${jobId}`);
+        const jobIdInput = document.getElementById(`jobId${jobId}`);
+        jobIdInput.value = jobId;
+        modal.style.display = 'block';
+      }
+
+      if (event.target.classList.contains('job-detail-btn')) {
+        event.preventDefault();
+        const jobId = event.target.getAttribute('data-job-id');
+        const modal = document.getElementById(`jobDetailModal${jobId}`);
+        modal.style.display = 'block';
+      }
+    });
+
+    // Close modals
+    document.querySelectorAll('.close').forEach(span => {
+      span.onclick = function () {
+        const modal = span.closest('.modal');
+        modal.style.display = 'none';
+      };
+    });
+
+    // Close modals when clicking outside of them
+    window.onclick = function (event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    };
+
+    // Handle search form submission
+    document.getElementById('search-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const query = document.getElementById('search-input').value;
+      const response = await fetch(`/job/search/${encodeURIComponent(query)}`);
+
+      if (response.ok) {
+        const data = await response.json();
+        displayResults(data.results, data.user);
+      } else {
+        console.error('Search failed:', response.statusText);
+      }
+    });
+
+    // Handle search results
+    function displayResults(jobs, user) {
+      const resultsContainer = document.getElementById('job-cards');
+      resultsContainer.innerHTML = '';
+
+      if (jobs.length === 0) {
+        resultsContainer.innerHTML = '<p class="result">No Jobs Found</p>';
+        return;
+      }
+
+      jobs.forEach(job => {
+        const jobCard = document.createElement('div');
+        jobCard.classList.add('card');
+        jobCard.innerHTML = `
+          <div class="card-body">
+            <h6 class="card-title">${job.position}</h6>
+            <p class="card-text"><i class="fas fa-building"></i> ${job.company}</p>
+            <p class="card-location"><i class="fas fa-map-marker-alt"></i> ${job.location}</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fas fa-money-bill-wave"></i> From ${job.salary}</li>
+              <li class="list-group-item"><i class="fas fa-briefcase"></i> ${job.job_type}</li>
+              <li class="list-group-item"><i class="fas fa-clock"></i> ${job.experience}</li>
+            </ul>
+            <div class="button-group">
+              <button id="searchcard-btn" data-job-id=${job.id} class="job-detail-btn">Details</button>
+              ${user.name && user.name === 'candidate' ? `<button id="searchcard-btn" class="apply-btn" data-job-id="${job.id}">Apply</button>` : ''}
+            </div>
+          </div>`;
+        resultsContainer.appendChild(jobCard);
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    const messageBox = document.getElementById("messageBox");
+
+    if (message) {
+      messageBox.textContent = message;
+      messageBox.style.display = "block";
+
+      setTimeout(() => {
+        messageBox.style.display = "none";
+        history.replaceState(null, "", window.location.pathname);
+      }, 1500);
+    }
+  });
+
+</script>
+
+</html>

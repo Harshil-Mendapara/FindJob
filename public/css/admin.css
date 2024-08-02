@@ -1,0 +1,194 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 45px;
+  gap: 2rem;
+}
+
+.job-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 200px -1293px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.job-container h3 {
+  margin-bottom: -20px;
+  margin-top: 20px;
+}
+
+.section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.h3 {
+  margin-right: 92%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.box {
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.box h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.box p {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.box-user {
+  background-color: #4285f4;
+  color: #fff;
+}
+
+.box-job {
+  background-color: #e76f67;
+  color: #fff;
+}
+
+.box-pending {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.box-reviewed {
+  background-color: #af4c87;
+  color: #fff;
+}
+
+.box-interview {
+  background-color: #d87fb4;
+  color: #fff;
+}
+
+.box-selected {
+  background-color: #c8c222;
+  color: #fff;
+}
+
+.box-rejected {
+  background-color: #22b5c8;
+  color: #fff;
+}
+
+.selected {
+  width: 10px;
+  margin-bottom: 10%;
+  top: 10%;
+  display: flex;
+  gap: 1rem;
+}
+
+#application {
+  width: 85%;
+  height: auto;
+  padding: 20px;
+  margin-top: 50px;
+  margin-left: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px 50px;
+  margin: 50%;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr {
+  text-align: middle;
+}
+
+.fa-regular {
+  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.fa-regular:hover {
+  color: #007bff;
+}
+
+th {
+  background-color: #50a1f7;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+select {
+  width: 90%;
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  border-radius: 100px;
+  background-color: #007bff;
+  padding: 1px 0;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+select option {
+  padding: 2px;
+  background-color: #fff;
+  color: #007bff;
+}
+
+select option:hover {
+  background-color: #e9e9e9;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+}
+
+.action-container form {
+  margin: 0;
+}
+
+.action-container form:first-child {
+  margin-right: 10px;
+}
+
+#trash {
+  color: red;
+}

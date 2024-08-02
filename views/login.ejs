@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindJob</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+  <div id="messageBox"></div>
+  <div class="container">
+    <h3>Login</h3>
+    <form action="/user/login" method="POST">
+      <div class="login-container">
+        <div class="form-group">
+          <label for="usernameOrEmail">Username or Email:</label>
+          <input type="text" name="usernameOrEmail" placeholder="Enter Username or Email" required />
+          <label id="usernameMessageBox"></label>
+        </div>
+        <div class="form-group password-container">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter Password" required />
+          <i class="far fa-eye-slash toggle-password"></i>
+          <label id="passwordMessageBox"></label>
+        </div>
+        <lable id="messageBox"></lable>
+      </div>
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="/signup">Register here</a></p>
+    </form>
+  </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get("message");
+    const messageType = urlParams.get("type");
+    const usernameMessageBox = document.getElementById("usernameMessageBox");
+    const logoutMessageBox = document.getElementById("messageBox");
+    const passwordMessageBox = document.getElementById("passwordMessageBox");
+
+    const messageBox = message.includes("password") ? passwordMessageBox : message.includes("Logout") ? logoutMessageBox : usernameMessageBox;
+
+
+    if (message && messageBox) {
+      messageBox.textContent = message;
+      messageBox.style.display = "block";
+
+      setTimeout(() => {
+        messageBox.style.display = "none";
+        history.replaceState(null, "", window.location.pathname);
+      }, 1500);
+    }
+  });
+
+  function showPassword() {
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+  }
+  document
+    .querySelector(".toggle-password")
+    .addEventListener("click", function () {
+      showPassword();
+      this.classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye-slash");
+    });
+</script>
+
+</html>

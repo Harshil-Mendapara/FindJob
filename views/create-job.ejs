@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindJob</title>
+    <link rel="stylesheet" href="/css/job.css" />
+  </head>
+  <style>
+    body{
+      overflow-y: hidden;
+    }
+  </style>
+  <body>
+    <%- include('Navbar.ejs') %> <%- include('aside-dashboard.ejs') %>
+
+    <div class="Job-container">
+      <h2>Create Job</h2>
+      <form action="/job/add" method="POST">
+        <div class="input-container">
+          <div class="form-group">
+            <label for="position">Position</label>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              placeholder="Enter a position"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Enter Company Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input
+              type="text"
+              id="c-location"
+              name="location"
+              placeholder="Enter Location"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-container">
+          <div class="form-group">
+            <label for="job_type">Job Type</label>
+            <select id="job_type" name="job_type">
+              <option>Select Job Type</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Internship">Internship</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="salary">Salary</label>
+            <input
+              type="text"
+              id="salary"
+              name="salary"
+              placeholder="Enter Salary"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Skills</label>
+            <input
+              type="text"
+              id="skills"
+              name="skills"
+              placeholder="Enter Skills"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-container">
+          <div class="form-group">
+            <label for="experience">Experience</label>
+            <input
+              type="text"
+              id="experience"
+              name="experience"
+              placeholder="Enter Experience"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="qualifications">Qualifications</label>
+            <input
+              type="text"
+              id="qualifications"
+              name="qualifications"
+              placeholder="Enter Qualifications"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Enter Description"
+            required
+          ></textarea>
+        </div>
+        <div class="create-container">
+          <button class="create-btn" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

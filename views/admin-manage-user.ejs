@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindJob</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<style>
+    body {
+        overflow: auto;
+    }
+</style>
+
+<body>
+    <%- include('Navbar.ejs') %>
+        <%- include('aside-dashboard.ejs') %>
+
+            <div id="application">
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                    <% if (users && users.length> 0) { %>
+                        <% users.forEach((user, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1%>
+                                </td>
+                                <td>
+                                    <%= user.username %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td>
+                                    <%= user.role.name.charAt(0).toUpperCase() + user.role.name.slice(1) %>
+                                </td>
+                                <% if (user.id===userId) { %>
+                                    <td></td>
+                                    <% } else { %>
+                                        <td>
+                                            <div class="action-container">
+                                                <form action="/admin/update-role/<%= user.id %>" method="POST">
+                                                    <select name="newRoleName" onchange="this.form.submit()">
+                                                        <option value="candidate" <% if
+                                                            (user.role.name.toLowerCase()==='candidate' ) { %> selected
+                                                            <% } %>>Candidate
+                                                        </option>
+                                                        <option value="recruiter" <% if
+                                                            (user.role.name.toLowerCase()==='recruiter' ) { %> selected
+                                                            <% } %>>Recruiter
+                                                        </option>
+                                                        <option value="admin" <% if
+                                                            (user.role.name.toLowerCase()==='admin' ) { %> selected <% }
+                                                                %>>Admin</option>
+                                                    </select>
+                                                </form>
+                                                <form action="/admin/delete-user/<%= user.id %>" method="POST"
+                                                    enctype="multipart/form-data" onsubmit="return deleteUser();"
+                                                    style="display: inline">
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                                    <button type="submit"
+                                                        style="border: none; background: none; padding: 0;">
+                                                        <i id="trash" class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <% } %>
+                            </tr>
+                            <% }); %>
+                                <% } %>
+                </table>
+            </div>
+</body>
+<script>
+    const deleteUser = () => {
+        return confirm("Are you Sure?");
+    };
+
+</script>
+
+</html>
