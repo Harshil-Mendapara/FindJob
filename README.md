@@ -10,8 +10,8 @@ Candidate:
 
 ● Register/Login: Candidates can register and log in to the portal.                                                                                                                                                  
 ● Apply for Jobs: Candidates can browse available jobs and apply for them.                                                                                                                                           
-● View Job Descriptions: Candidates can view detailed job descriptions.
-● Manage Profile: Candidates can access their dashboard to manage their profile details.
+● View Job Descriptions: Candidates can view detailed job descriptions.                                                                                                                                              
+● Manage Profile: Candidates can access their dashboard to manage their profile details.                                                                                                                             
 ● Track Applications: Candidates can see a list of jobs they have applied for.
 
 Recruiter:
