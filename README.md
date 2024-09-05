@@ -52,7 +52,7 @@ Installation:
 
 2. Install dependencies:                                                                                                                                                                                             
    ● cd FindJob                                                                                                                                                                                                      
-   ● npm i
+   ● npm install
 
 3. Set up the database:                                                                                                                                                                                              
    ● Create a MySQL database.                                                                                                                                                                                        
