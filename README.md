@@ -6,6 +6,7 @@ Features
 
 Role-Based Access
 
+
 Candidate:
 
 ● Register/Login: Candidates can register and log in to the portal.                                                                                                                                                  
@@ -13,6 +14,7 @@ Candidate:
 ● View Job Descriptions: Candidates can view detailed job descriptions.                                                                                                                                              
 ● Manage Profile: Candidates can access their dashboard to manage their profile details.                                                                                                                             
 ● Track Applications: Candidates can see a list of jobs they have applied for.
+
 
 Recruiter:
 
@@ -23,6 +25,7 @@ Recruiter:
 ● Change Application Status: Recruiters can update the status of a candidate’s job application.                                                                                                                      
 ● Download Resumes: Recruiters can download the resumes/CVs uploaded by candidates during job application.
 
+
 Admin:
 
 ● Register/Login: Admins can register and log in to the portal.                                                                                                                                                      
@@ -32,27 +35,30 @@ Admin:
 ● Track Registrations: Admins can see statistics on how many users have registered under each role (candidate, recruiter, admin).                                                                                    
 
 
-Technology Stack
-● Backend: Node.js, Express.js   
-● Database: MySQL with Sequelize ORM
-● Frontend: EJS, HTML, CSS
+
+Technology Stack                                                                                                                                                                                          
+● Backend: Node.js, Express.js                                                                                                                                                                                       
+● Database: MySQL with Sequelize ORM                                                                                                                                                                                 
+● Frontend: EJS, HTML, CSS                                                                                                                                                                                           
+
 
 The application uses session-based authentication to secure user sessions and ensure that only authorized users can access specific functionalities based on their roles.
 
+
 Installation:
 
-1. Clone the repository:                                                                                                                                                                                            
+1. Clone the repository:                                                                                                                                                                                             
    ● https://github.com/Harshil-Mendapara/FindJob.git
 
 2. Install dependencies:                                                                                                                                                                                             
    ● cd FindJob                                                                                                                                                                                                      
    ● npm i
 
-3. Set up the database:
+3. Set up the database:                                                                                                                                                                                              
    ● Create a MySQL database.                                                                                                                                                                                        
    ● Update the database configuration in config/config.json.
 
-4. Start the server:
+4. Start the server:                                                                                                                                                                                                 
    ● npm start
 
 The application will be available at http://localhost:3000.
