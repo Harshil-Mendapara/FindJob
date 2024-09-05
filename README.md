@@ -27,14 +27,15 @@ Admin:
 
 ● Register/Login: Admins can register and log in to the portal.
 ● Manage Users: Admins can view and manage users who have registered as candidates, recruiters, or admins.
-● Change User Roles: Admins have the ability to change the role of any user.
-● Delete Users: Admins can delete users from the system.
-● Track Registrations: Admins can see statistics on how many users have registered under each role (candidate, recruiter, admin).
+● Change User Roles: Admins have the ability to change the role of any user.                                                                                                                                         
+● Delete Users: Admins can delete users from the system.                                                                                                                                                             
+● Track Registrations: Admins can see statistics on how many users have registered under each role (candidate, recruiter, admin).                                                                                    
+
 
 Technology Stack
-Backend: Node.js, Express.js
-Database: MySQL with Sequelize ORM
-Frontend: EJS, HTML, CSS
+● Backend: Node.js, Express.js                                                                                                                                                                                       
+● Database: MySQL with Sequelize ORM
+● Frontend: EJS, HTML, CSS
 
 The application uses session-based authentication to secure user sessions and ensure that only authorized users can access specific functionalities based on their roles.
 
